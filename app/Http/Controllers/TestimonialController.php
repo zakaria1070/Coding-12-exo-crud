@@ -14,7 +14,8 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        //
+        $testimonials = testimonial::all();
+        return view('back.testimonial', compact('testimonials'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.testimonialcreate');
     }
 
     /**
@@ -35,7 +36,12 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $testimonial=new Testimonial();
+        $testimonial->titre=request('titre');
+        $testimonial->description=request('description');
+        $testimonial->image=request('image');
+        $testimonial->save();
+        return redirect()->route('testimonial');
     }
 
     /**
@@ -55,9 +61,10 @@ class TestimonialController extends Controller
      * @param  \App\testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function edit(testimonial $testimonial)
+    public function edit($id)
     {
-        //
+        $testimonials = testimonial::find($id);
+        return view('edit.testimonialedit', compact('testimonials'));
     }
 
     /**
@@ -67,9 +74,14 @@ class TestimonialController extends Controller
      * @param  \App\testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, testimonial $testimonial)
+    public function update($id)
     {
-        //
+        $testimonials = testimonial::find($id);
+        $testimonials->titre=request('titre');
+        $testimonials ->description=request('description');
+        $testimonials ->image=request('image');
+        $testimonials ->save();
+        return redirect()->route('testimonial');
     }
 
     /**
@@ -78,8 +90,9 @@ class TestimonialController extends Controller
      * @param  \App\testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(testimonial $testimonial)
+    public function destroy($id)
     {
-        //
+        Testimonial::find($id)->delete();
+        return redirect()->back();
     }
 }
