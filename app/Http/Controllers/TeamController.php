@@ -14,7 +14,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = team::all();
+        return view('back.team', compact('teams'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.teamcreate');
     }
 
     /**
@@ -35,7 +36,12 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team=new Team();
+        $team->nom=request('nom');
+        $team->description=request('description');
+        $team->image=request('image');
+        $team->save();
+        return redirect()->route('team');
     }
 
     /**
@@ -55,9 +61,10 @@ class TeamController extends Controller
      * @param  \App\team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(team $team)
+    public function edit($id)
     {
-        //
+        $teams = team::find($id);
+        return view('edit.teamedit', compact('teams'));
     }
 
     /**
@@ -67,9 +74,14 @@ class TeamController extends Controller
      * @param  \App\team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, team $team)
+    public function update($id)
     {
-        //
+        $teams = team::find($id);
+        $teams ->nom=request('nom');
+        $teams ->description=request('description');
+        $teams ->image=request('image');
+        $teams ->save();
+        return redirect()->route('team');
     }
 
     /**
@@ -78,8 +90,9 @@ class TeamController extends Controller
      * @param  \App\team  $team
      * @return \Illuminate\Http\Response
      */
-    public function destroy(team $team)
+    public function destroy($id)
     {
-        //
+        Team::find($id)->delete();
+        return redirect()->back();
     }
 }
