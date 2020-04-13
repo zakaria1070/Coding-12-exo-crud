@@ -14,7 +14,8 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        //
+        $portfolios = portfolio::all();
+        return view('back.portfolio', compact('portfolios'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.portfoliocreate');
     }
 
     /**
@@ -35,7 +36,12 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $portfolio=new Portfolio();
+        $portfolio->titre=request('titre');
+        $portfolio->description=request('description');
+        $portfolio->image=request('image');
+        $portfolio->save();
+        return redirect()->route('portfolio');
     }
 
     /**
@@ -55,9 +61,10 @@ class PortfolioController extends Controller
      * @param  \App\portfolio  $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function edit(portfolio $portfolio)
+    public function edit($id)
     {
-        //
+        $portfolios = portfolio::find($id);
+        return view('edit.portfolioedit', compact('portfolios'));
     }
 
     /**
@@ -67,9 +74,14 @@ class PortfolioController extends Controller
      * @param  \App\portfolio  $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, portfolio $portfolio)
+    public function update($id)
     {
-        //
+        $portfolios = portfolio::find($id);
+        $portfolios ->titre=request('titre');
+        $portfolios ->description=request('description');
+        $portfolios ->image=request('image');
+        $portfolios ->save();
+        return redirect()->route('portfolio');
     }
 
     /**
@@ -78,8 +90,9 @@ class PortfolioController extends Controller
      * @param  \App\portfolio  $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(portfolio $portfolio)
+    public function destroy($id)
     {
-        //
+        Portfolio::find($id)->delete();
+        return redirect()->back();
     }
 }

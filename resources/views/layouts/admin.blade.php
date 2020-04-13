@@ -27,7 +27,7 @@
           <li><a href="/service">Services</a></li>
           <li><a href="/subscribe">Subscribe</a></li>
           <li><a href="/portfolio">Portfolio</a></li>
-          <li><a href="/testimonialedit">Testimonials</a></li>
+          <li><a href="/testimonial">Testimonial</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#contact">Contact Us</a></li>
               {{-- <li class="menu-has-children"><a href="">Drop Down</a>
