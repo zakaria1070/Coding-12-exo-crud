@@ -14,7 +14,8 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        //
+        $subscribes = subscribe::all();
+        return view('back.subscribe', compact('subscribes'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SubscribeController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.subscribecreate');
     }
 
     /**
@@ -35,7 +36,11 @@ class SubscribeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subscribe=new Subscribe();
+        $subscribe->titre=request('titre');
+        $subscribe->description=request('description');
+        $subscribe->save();
+        return redirect()->route('subscribe');
     }
 
     /**
@@ -55,9 +60,10 @@ class SubscribeController extends Controller
      * @param  \App\subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function edit(subscribe $subscribe)
+    public function edit($id)
     {
-        //
+        $subscribes = subscribe::find($id);
+        return view('edit.subscribeedit', compact('subscribes'));
     }
 
     /**
@@ -67,9 +73,13 @@ class SubscribeController extends Controller
      * @param  \App\subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, subscribe $subscribe)
+    public function update($id)
     {
-        //
+        $subscribes = subscribe::find($id);
+        $subscribes ->titre=request('titre');
+        $subscribes ->description=request('description');
+        $subscribes ->save();
+        return redirect()->route('subscribe');
     }
 
     /**
@@ -78,8 +88,9 @@ class SubscribeController extends Controller
      * @param  \App\subscribe  $subscribe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(subscribe $subscribe)
+    public function destroy($id)
     {
-        //
+        Subscribe::find($id)->delete();
+        return redirect()->back();
     }
 }

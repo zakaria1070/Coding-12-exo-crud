@@ -25,8 +25,8 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/service">Services</a></li>
-          <li><a href="/subscribeedit">Subscribe</a></li>
-          <li><a href="/portofolioedit">Portfolio</a></li>
+          <li><a href="/subscribe">Subscribe</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
           <li><a href="/testimonialedit">Testimonials</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#contact">Contact Us</a></li>
