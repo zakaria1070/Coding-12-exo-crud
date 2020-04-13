@@ -14,7 +14,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = service::all();
+        return view('back.service', compact('services'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.servicecreate');
     }
 
     /**
@@ -35,7 +36,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service=new Service();
+        $service->titre=request('titre');
+        $service->description=request('description');
+        $service->logo=request('logo');
+        $service->save();
+        return redirect()->route('service');
     }
 
     /**
@@ -55,9 +61,10 @@ class ServiceController extends Controller
      * @param  \App\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(service $service)
+    public function edit($id)
     {
-        //
+        $services = service::find($id);
+        return view('edit.serviceedit', compact('services'));
     }
 
     /**
@@ -67,9 +74,14 @@ class ServiceController extends Controller
      * @param  \App\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, service $service)
+    public function update($id)
     {
-        //
+        $services = service::find($id);
+        $services ->titre=request('titre');
+        $services ->description=request('description');
+        $services ->logo=request('logo');
+        $services ->save();
+        return redirect()->route('service');
     }
 
     /**
@@ -78,8 +90,9 @@ class ServiceController extends Controller
      * @param  \App\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(service $service)
+    public function destroy($id)
     {
-        //
+        Service::find($id)->delete();
+        return redirect()->back();
     }
 }
